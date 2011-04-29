@@ -10,4 +10,8 @@ class ViewTemplate
   field :handlers, :default => :haml
 
   validates :name, :prefix, :source, :presence => true
+
+  after_save do
+    MongoidResolver.instance.clear_cache
+  end
 end

@@ -1,4 +1,6 @@
 Arailsdemo2::Application.routes.draw do
+  get "pages/home"
+
   resources :view_templates
 
   # The priority is based upon order of creation:

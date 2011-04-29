@@ -12,4 +12,9 @@ describe ViewTemplate do
   [:name, :prefix, :source].each do |field|
     it { should validate_presence_of(field) }
   end
+
+  it "clears the MongoidResolver instance cache after saving" do
+    MongoidResolver.instance.should_receive(:clear_cache)
+    subject.save(:validate => false)
+  end
 end
