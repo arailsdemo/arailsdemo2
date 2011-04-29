@@ -1,42 +1,37 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.7'
+gem "mongoid", "2.0.1"
+gem "bson_ext", "1.3.0"
+gem "jquery-rails", "0.2.7"
+gem "haml-rails", "0.3.4"
+gem "compass", "0.11.1"
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+group :development, :test do
+  gem "rspec-rails", "2.5.0"
+  gem "capybara", "0.4.0"
+  gem "cucumber-rails", "0.4.1"
+  gem "launchy", "0.4.0"
+  gem "factory_girl_rails", "1.1.beta1", :require => false
+  gem "rcov", "0.9.9"
+  gem "spork", "0.9.0.rc3"
+  gem "guard-rspec", "0.3.0"
+  gem "guard-spork", "0.1.10"
+  gem "growl", "1.0.3"
 
+  gem "wirble"
+  gem "hirb"
+  gem "awesome_print", :require => "ap"
+  gem "interactive_editor"
+end
 
-# Use unicorn as the web server
-# gem 'unicorn'
+platforms :mri_18 do
+  gem 'ruby-debug'
+  gem "SystemTimer"
+end
 
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
-# gem 'ruby-debug'
-# gem 'ruby-debug19', :require => 'ruby-debug'
-
-# Bundle the extra gems:
-# gem 'bj'
-# gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
-# gem 'aws-s3', :require => 'aws/s3'
-
-# Bundle gems for the local environment. Make sure to
-# put test-only gems in this group so their generators
-# and rake tasks are available in development mode:
-# group :development, :test do
-#   gem 'webrat'
-# end
-gem "mongoid", "2.0.0.rc.7"
-gem "bson_ext", "~> 1.2"
-gem "rspec-rails", ">= 2.4.1", :group => [:development]
-gem "factory_girl_rails", "1.1.beta1", :group => :test
-gem "rcov", :group => [:development]
-gem "jquery-rails"
-gem "haml"
-gem "haml-rails"
-gem "compass"
-gem "capybara", "0.4.0", :group => :test
-gem "cucumber-rails", :group => :test
-gem "launchy", :group => :test
+platforms :mri_19 do
+  gem 'linecache19', '0.5.11' # 0.5.12 cannot install on 1.9.1, and 0.5.11 appears to work with both 1.9.1 & 1.9.2
+  gem 'ruby-debug19'
+  gem 'ruby-debug-base19', RUBY_VERSION == '1.9.1' ? '0.11.23' : '~> 0.11.24'
+end
