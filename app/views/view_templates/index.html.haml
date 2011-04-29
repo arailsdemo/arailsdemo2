@@ -1,0 +1,31 @@
+%h1 Listing view_templates
+
+%table
+  %tr
+    %th Name
+    %th Prefix
+    %th Partial
+    %th Source
+    %th Locale
+    %th Formats
+    %th Handlers
+    %th
+    %th
+    %th
+
+  - @view_templates.each do |view_template|
+    %tr
+      %td= view_template.name
+      %td= view_template.prefix
+      %td= view_template.partial
+      %td= view_template.source
+      %td= view_template.locale
+      %td= view_template.formats
+      %td= view_template.handlers
+      %td= link_to 'Show', view_template
+      %td= link_to 'Edit', edit_view_template_path(view_template)
+      %td= link_to 'Destroy', view_template, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New View template', new_view_template_path

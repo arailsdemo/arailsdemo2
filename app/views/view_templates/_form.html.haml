@@ -1,0 +1,31 @@
+= form_for @view_template do |f|
+  -if @view_template.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@view_template.errors.count, "error")} prohibited this view_template from being saved:"
+      %ul
+        - @view_template.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :prefix
+    = f.text_field :prefix
+  .field
+    = f.label :partial
+    = f.check_box :partial
+  .field
+    = f.label :source
+    = f.text_area :source
+  .field
+    = f.label :locale
+    = f.text_field :locale
+  .field
+    = f.label :formats
+    = f.text_field :formats
+  .field
+    = f.label :handlers
+    = f.text_field :handlers
+  .actions
+    = f.submit 'Save'

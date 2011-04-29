@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @view_template.name
+%p
+  %b Prefix:
+  = @view_template.prefix
+%p
+  %b Partial:
+  = @view_template.partial
+%p
+  %b Source:
+  = @view_template.source
+%p
+  %b Locale:
+  = @view_template.locale
+%p
+  %b Formats:
+  = @view_template.formats
+%p
+  %b Handlers:
+  = @view_template.handlers
+
+= link_to 'Edit', edit_view_template_path(@view_template)
+\|
+= link_to 'Back', view_templates_path
