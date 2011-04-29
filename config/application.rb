@@ -13,7 +13,7 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Arailsdemo2
   class Application < Rails::Application
-  
+
     config.generators do |g|
       g.fixture_replacement :factory_girl, :dir => 'spec/factories'
     end
@@ -48,5 +48,7 @@ module Arailsdemo2
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.mongoid.preload_models = false
   end
 end

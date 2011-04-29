@@ -18,6 +18,7 @@ group :development, :test do
   gem "guard-rspec", "0.3.0"
   gem "guard-spork", "0.1.10"
   gem "growl", "1.0.3"
+  gem 'mongoid-rspec', '1.4.2'
 
   gem "wirble"
   gem "hirb"
