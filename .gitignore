@@ -12,3 +12,5 @@ public/system/*
 tmp/restart.txt
 coverage/
 config/initializers/secret_token.rb
+notes
+
