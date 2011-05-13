@@ -1,9 +1,9 @@
 When /^I create a view template for the home page$/ do
   visit new_view_template_path
-  fill_in "Name", :with => "home"
-  fill_in "Prefix", :with => "pages"
-  fill_in "Source", :with => "Mongoid view"
-  click_button "Save"
+  fill_in t("view_template.name"), :with => "home"
+  fill_in t("view_template.prefix"), :with => "pages"
+  fill_in t("view_template.source"), :with => "Mongoid view"
+  click_button t("view_template.form.save")
   ViewTemplate.count.should == 1
 end
 

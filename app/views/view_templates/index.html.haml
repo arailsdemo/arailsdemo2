@@ -2,13 +2,13 @@
 
 %table
   %tr
-    %th Name
-    %th Prefix
-    %th Partial
-    %th Source
-    %th Locale
-    %th Formats
-    %th Handlers
+    %th= t("view_template.name")
+    %th= t("view_template.prefix")
+    %th= t("view_template.partial")
+    %th= t("view_template.source")
+    %th= t("view_template.locale")
+    %th= t("view_template.formats")
+    %th= t("view_template.handlers")
     %th
     %th
     %th
@@ -22,10 +22,10 @@
       %td= view_template.locale
       %td= view_template.formats
       %td= view_template.handlers
-      %td= link_to 'Show', view_template
-      %td= link_to 'Edit', edit_view_template_path(view_template)
-      %td= link_to 'Destroy', view_template, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to t("view_template.links.show"), view_template
+      %td= link_to t("view_template.links.edit"), edit_view_template_path(view_template)
+      %td= link_to (t"view_template.links.destroy"), view_template, :confirm => 'Are you sure?', :method => :delete
 
 %br
 
-= link_to 'New View template', new_view_template_path
+= link_to t('view_template.links.new'), new_view_template_path
