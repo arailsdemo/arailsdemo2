@@ -1,13 +1,11 @@
-# Read about factories at http://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :view_template do
-      name "MyString"
-      prefix "MyString"
-      partial false
-      source "MyText"
-      locale "MyString"
-      formats "MyString"
-      handlers "MyString"
-    end
+    name "home"
+    prefix "pages"
+    source "Mongoid view"
+  end
+
+  factory :home_page_view_template, :parent => :view_template do
+  end
+
 end
