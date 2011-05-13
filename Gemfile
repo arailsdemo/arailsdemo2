@@ -8,18 +8,22 @@ gem "haml-rails", "0.3.4"
 gem "compass", "0.11.1"
 
 group :development, :test do
-  gem "rspec-rails", "2.5.0"
+  gem "rspec-rails", "~>2.6.0"
   gem "capybara", "0.4.0"
   gem "cucumber-rails", "0.4.1"
   gem "launchy", "0.4.0"
   gem "factory_girl_rails", "1.1.beta1", :require => false
-  gem "rcov", "0.9.9"
-  gem "spork", "0.9.0.rc3"
-  gem "guard-rspec", "0.3.0"
-  gem "guard-spork", "0.1.10"
-  gem "growl", "1.0.3"
   gem 'mongoid-rspec', '1.4.2'
+end
 
+group :development do
+  gem "spork", "0.9.0.rc3", :require => false
+  gem "guard-rspec", "0.3.0", :require => false
+  gem "guard-spork", "0.1.10", :require => false
+  gem "guard-cucumber", '0.3.0', :require => false
+  gem "growl", "1.0.3", :require => false
+
+  gem "rcov", "0.9.9", :require => false
   gem "wirble"
   gem "hirb"
   gem "awesome_print", :require => "ap"
