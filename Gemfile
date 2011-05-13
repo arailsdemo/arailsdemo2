@@ -22,6 +22,7 @@ group :development do
   gem "guard-spork", "0.1.10", :require => false
   gem "guard-cucumber", '0.3.0', :require => false
   gem "growl", "1.0.3", :require => false
+  gem "guard-cucumber", '0.3.0', :require => false
 
   gem "rcov", "0.9.9", :require => false
   gem "wirble"
