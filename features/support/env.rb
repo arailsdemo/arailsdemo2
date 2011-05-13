@@ -31,8 +31,8 @@ Capybara.save_and_open_page_path = 'tmp/capybara/'
 ActionController::Base.allow_rescue = false
 
 require 'factory_girl'
-require 'factory_girl/step_definitions'
 Dir[File.expand_path(File.join(File.dirname(__FILE__),'..','..','spec','factories','*.rb'))].each {|f| require f}
+require 'factory_girl/step_definitions'
 
 
 # Remove/comment out the lines below if your app doesn't have a database.

@@ -9,6 +9,9 @@ en:
         locale: Locale
         formats: Format
         handlers: Handler
+    errors:
+      messages:
+        duplicate: is a duplicate
   view_template:
     <<: *view_template
     form:

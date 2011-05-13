@@ -9,3 +9,7 @@ When /^I create an? (.+) (?:for|with(?: the)?) (.+)$/ do |model, factory|
   submit_form factory_name, valid_attributes
   factory_name.classify.constantize.count.should == 1
 end
+
+Then /^I should get an? (.*) error$/ do |type|
+  page.should have_content I18n.t("mongoid.errors.messages.#{type}")
+end
