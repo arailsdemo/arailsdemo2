@@ -26,6 +26,6 @@
     = f.text_field :formats
   .field
     = f.label :handlers
-    = f.text_field :handlers
+    = f.select :handlers, options_for_select([['Haml', 'haml'],['Erb', 'erb']])
   .actions
     = f.submit t("view_template.form.save")

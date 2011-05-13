@@ -24,7 +24,7 @@ describe "view_templates/new.html.haml" do
       assert_select "textarea#view_template_source", :name => "view_template[source]"
       assert_select "input#view_template_locale", :name => "view_template[locale]"
       assert_select "input#view_template_formats", :name => "view_template[formats]"
-      assert_select "input#view_template_handlers", :name => "view_template[handlers]"
+      assert_select "select#view_template_handlers", :name => "view_template[handlers]"
     end
   end
 end
