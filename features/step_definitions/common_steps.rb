@@ -10,6 +10,14 @@ When /^I create an? (.+) (?:for|with(?: the)?) (.+)$/ do |model, factory|
   factory_name.classify.constantize.count.should == 1
 end
 
+# "When I submit a view template form with invalid haml"
+When /^I submit a (.+) form with (.+)$/ do |model, prefix|
+  model = model.gsub(" ", "_")
+  factory = prefix.gsub(" ", "_") + "_" + model
+  submit_form model, Factory.attributes_for(factory)
+end
+
 Then /^I should get an? (.*) error$/ do |type|
-  page.should have_content I18n.t("mongoid.errors.messages.#{type}")
+  exception = "undefined local variable" if type == "haml"
+  page.should have_content I18n.t("mongoid.errors.messages.#{type}", :exception => exception)
 end

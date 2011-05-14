@@ -20,7 +20,7 @@ describe ViewTemplate do
     subject.save(:validate => false)
   end
 
-  context "validation" do
+  context "duplicate validation" do
     before do
       @existing = Factory(:view_template)
       @template = Factory.build(:duplicate_view_template)
@@ -34,6 +34,27 @@ describe ViewTemplate do
 
     it "adds error message to :name if name/prefix is a duplicate" do
       @template.errors[:name].should == [I18n.t('mongoid.errors.messages.duplicate')]
+    end
+  end
+
+  context "Haml validation" do
+    before { @template = Factory.build(:invalid_haml_view_template) }
+
+    it "gives a :source error if invalid Haml is present" do
+      Haml::Engine.any_instance.stub(:render) { raise "any instance!" }
+      @template.valid?
+      @template.errors[:source].first.should match /#{I18n.t('mongoid.errors.messages.haml', :exception => 'any instance!')}/
+    end
+
+    it "allows 'no block given' exceptions" do
+      Haml::Engine.any_instance.stub(:render) { raise LocalJumpError }
+      @template.source = "=yield"
+      @template.should be_valid
+    end
+
+    it "doesn't validate if handlers isn't 'haml' " do
+      @template.handlers = 'erb'
+      @template.should be_valid
     end
   end
 end

@@ -12,6 +12,7 @@ en:
     errors:
       messages:
         duplicate: is a duplicate
+        haml: "has some stanky Haml: %{exception}"
   view_template:
     <<: *view_template
     form:

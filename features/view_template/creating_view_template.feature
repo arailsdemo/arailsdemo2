@@ -14,3 +14,7 @@ Feature: Creating View Templates
     Given a view template exists
     When I attempt to create a duplicate template
     Then I should get a duplicate error
+
+  Scenario: Submitting invalid Haml
+    When I submit a view template form with invalid haml
+    Then I should get a haml error
