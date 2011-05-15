@@ -15,6 +15,7 @@ group :development, :test do
   gem "factory_girl_rails", "1.1.beta1", :require => false
   gem 'mongoid-rspec', '1.4.2'
   gem 'hashie', '1.0.0'
+  gem 'aruba', '0.3.6', :require => false
 end
 
 group :development do
