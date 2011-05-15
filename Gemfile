@@ -25,6 +25,8 @@ group :development do
   gem "guard-cucumber", '0.3.0', :require => false
   gem "growl", "1.0.3", :require => false
   gem "guard-cucumber", '0.3.0', :require => false
+  gem "guard", :git => "git://github.com/guard/guard.git", :branch => "hook"
+  gem "rb-fsevent", "0.4.0"
 
   gem "rcov", "0.9.9", :require => false
   gem "wirble"
