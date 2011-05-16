@@ -1,0 +1,10 @@
+File generated on Sun May 15 16:58:05 -0700 2011
+____________________________________________________________________________
+1) I am authenticated                             # common_steps.rb:1
+2) I attempt to create a duplicate template       # view_template_steps.rb:8
+3) I create an? (.+) (?:for|with(?: the)?) (.+)   # common_steps.rb:6
+4) I should get an? (.*) error                    # common_steps.rb:20
+5) I submit a (.+) form with (.+)                 # common_steps.rb:14
+____________________________________________________________________________
+6) an? (.+) exists with an? (.+) of "([^"]*)"     # mongoid_steps.rb:1
+7) the new template is used for the home page     # view_template_steps.rb:1
