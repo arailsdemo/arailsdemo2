@@ -2,6 +2,12 @@ Given /^I am authenticated$/ do
   true
 end
 
+# Given a view template exists
+Given /^an? (.+) exists$/ do |model|
+  factory_name = model.gsub(" ", "_")
+  instance_variable_set "@#{factory_name}", Factory(factory_name)
+end
+
 # "When I create a view template for the home page"
 When /^I create an? (.+) (?:for|with(?: the)?) (.+)$/ do |model, factory|
   factory_name = model.gsub(" ", "_")
