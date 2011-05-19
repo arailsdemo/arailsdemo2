@@ -12,3 +12,15 @@ When /^I attempt to create a duplicate template$/ do
 
   ViewTemplate.count.should == 1
 end
+
+Given /^a view template with three previous edits$/ do
+  @view_template = Factory(:view_template)
+  (1..3).each { |i| @view_template.update_attribute(:source, "This is version ##{i}") }
+end
+
+When /^I submit an edit for that view template$/ do
+  submit_form @view_template, :source => 'foo'
+end
+
+Then /^I should see the last three edits for that view template$/ do
+end

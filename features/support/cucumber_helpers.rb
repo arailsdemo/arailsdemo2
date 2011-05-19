@@ -1,6 +1,17 @@
+require 'hashie'
+
 module CucumberHelpers
-  def submit_form(model, form_values)
-    visit send(:"new_#{model}_path")  # visit the form page
+  def submit_form(instance_or_sym, form_values)
+
+    if Symbol === instance_or_sym || String === instance_or_sym
+      model = instance_or_sym
+      path = send(:"new_#{model}_path")
+    else
+      model = instance_or_sym.class.name.underscore
+      path = send(:"edit_#{model}_path", instance_or_sym)
+    end
+
+    visit path  # visit the form page
     model_translations = t.send(model)
     form_values.each_pair do |field, value|
       case value
