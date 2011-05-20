@@ -89,4 +89,20 @@ describe ViewTemplate do
       @template.reload.versions.to_a.should_not include(@reversion)
     end
   end
+
+  describe "#successful_update?" do
+    before { @template = Factory.build(:view_template) }
+
+    it "result is based on :revert param first" do
+      @template.should_receive(:revert).with("foo") { true }
+      @template.successful_update?(:revert => "foo").should be_true
+    end
+
+    it "result is based on :view_template param if :revert is nil" do
+      @template.stub(:revert){ nil }
+      @template.should_receive(:update_attributes).with("123") { true }
+      @template.successful_update?(:revert => "foo",
+                                   :view_template => '123').should be_true
+    end
+  end
 end

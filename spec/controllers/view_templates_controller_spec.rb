@@ -73,19 +73,13 @@ describe ViewTemplatesController do
   end
 
   describe "PUT update" do
-    context "reverting" do
-      it "reverts to the given version if params[:revert] given" do
-        ViewTemplate.stub(:find).with("1") { mock_view_template(:revert => true) }
-        mock_view_template.should_receive(:revert).with("2")
-        put :update, :id => "1", :revert => "2"
-      end
-    end
+    let(:params) { {"action"=>"update", "id"=>"1", "revert"=>"2", "controller"=>"view_templates"} }
 
     describe "with valid params" do
-      it "updates the requested view_template" do
-        ViewTemplate.stub(:find).with("37") { mock_view_template }
-        mock_view_template.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :view_template => {'these' => 'params'}
+      it "calls #successful_update? on the template instance" do
+        ViewTemplate.stub(:find).with("1") { mock_view_template }
+        mock_view_template.should_receive(:successful_update?).with(params)
+        put :update, params
       end
 
       it "assigns the requested view_template as @view_template" do

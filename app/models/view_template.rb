@@ -39,6 +39,10 @@ class ViewTemplate
     selected
   end
 
+  def successful_update?(params)
+    revert(params[:revert]) || update_attributes(params[:view_template])
+  end
+
   private
 
   def strip_whitespace
