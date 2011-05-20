@@ -23,6 +23,22 @@ class ViewTemplate
     MongoidResolver.instance.clear_cache
   end
 
+  def revert(_version)
+    return nil unless _version
+    selected = versions.where(:version => _version.to_i).first
+    new_attributes = selected.attributes
+    new_attributes.delete(:_id)
+    new_attributes.delete(:version)
+    update_attributes(new_attributes)
+
+    coll = db.collection("view_templates")
+    doc = coll.find("_id" => self.id).first
+    doc["versions"].delete_if {|v| v["_id"] == selected.id }
+    coll.update({"_id" => self.id}, {"$set" => {"versions" => doc["versions"]}})
+
+    selected
+  end
+
   private
 
   def strip_whitespace

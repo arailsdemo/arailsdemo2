@@ -68,4 +68,25 @@ describe ViewTemplate do
       @template.should be_valid
     end
   end
+
+  describe "#revert" do
+    before do
+      @template = Factory(:view_template)
+      (1..3).each { |i| @template.update_attribute(:source, i.to_s)  }
+      @reversion = @template.revert("2")
+    end
+
+    it "returns nil if not provided a version number" do
+      @template.revert(nil).should be_nil
+    end
+
+    it "makes the reverted vesion the most current" do
+      @template.reload.source.should == @reversion.source
+      @template.version.should == 5
+    end
+
+    it "removes the reverted version from the versions history" do
+      @template.reload.versions.to_a.should_not include(@reversion)
+    end
+  end
 end
