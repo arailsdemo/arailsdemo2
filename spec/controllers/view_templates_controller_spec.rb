@@ -73,6 +73,14 @@ describe ViewTemplatesController do
   end
 
   describe "PUT update" do
+    context "reverting" do
+      it "reverts to the given version if params[:revert] given" do
+        ViewTemplate.stub(:find).with("1") { mock_view_template(:revert => true) }
+        mock_view_template.should_receive(:revert).with("2")
+        put :update, :id => "1", :revert => "2"
+      end
+    end
+
     describe "with valid params" do
       it "updates the requested view_template" do
         ViewTemplate.stub(:find).with("37") { mock_view_template }
@@ -101,7 +109,8 @@ describe ViewTemplatesController do
       end
 
       it "re-renders the 'edit' template" do
-        ViewTemplate.stub(:find) { mock_view_template(:update_attributes => false) }
+        ViewTemplate.stub(:find) { mock_view_template(:update_attributes => false,
+                                                      :errors => {:foo => 'bar'}) }
         put :update, :id => "1"
         response.should render_template("edit")
       end

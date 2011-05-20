@@ -41,6 +41,9 @@ When /^I revert to the second most recent view template version$/ do
 end
 
 Then /^that view template should be the most current$/ do
+  within "div.view_template_current" do
+    page.should have_content @new_source
+  end
 end
 
 Then /^I should not see the current view template in the versions list$/ do

@@ -1,26 +1,27 @@
 %p#notice= notice
 
-%p
-  %b= "#{t('view_template.name')}:"
-  = @view_template.name
-%p
-  %b= "#{t('view_template.prefix')}:"
-  = @view_template.prefix
-%p
-  %b= "#{t('view_template.partial')}:"
-  = @view_template.partial
-%p
-  %b= "#{t('view_template.source')}:"
-  = @view_template.source
-%p
-  %b= "#{t('view_template.locale')}:"
-  = @view_template.locale
-%p
-  %b= "#{t('view_template.formats')}:"
-  = @view_template.formats
-%p
-  %b= "#{t('view_template.handlers')}:"
-  = @view_template.handlers
+.view_template_current
+  %p
+    %b= "#{t('view_template.name')}:"
+    = @view_template.name
+  %p
+    %b= "#{t('view_template.prefix')}:"
+    = @view_template.prefix
+  %p
+    %b= "#{t('view_template.partial')}:"
+    = @view_template.partial
+  %p
+    %b= "#{t('view_template.source')}:"
+    = @view_template.source
+  %p
+    %b= "#{t('view_template.locale')}:"
+    = @view_template.locale
+  %p
+    %b= "#{t('view_template.formats')}:"
+    = @view_template.formats
+  %p
+    %b= "#{t('view_template.handlers')}:"
+    = @view_template.handlers
 
 %h3 Previous Template Source Code Versions:
 %ul

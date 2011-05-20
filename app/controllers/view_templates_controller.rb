@@ -1,4 +1,6 @@
 class ViewTemplatesController < ApplicationController
+  respond_to :html, :xml
+
   # GET /view_templates
   # GET /view_templates.xml
   def index
@@ -58,15 +60,14 @@ class ViewTemplatesController < ApplicationController
   def update
     @view_template = ViewTemplate.find(params[:id])
 
-    respond_to do |format|
-      if @view_template.update_attributes(params[:view_template])
-        format.html { redirect_to(@view_template, :notice => t("view_template.flash.notice.updated")) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @view_template.errors, :status => :unprocessable_entity }
-      end
+    notice =  t("view_template.flash.notice.updated")
+    if params[:revert]
+      @view_template.revert(params[:revert])
+      flash[:notice] = notice
+    else @view_template.update_attributes(params[:view_template])
+      flash[:notice] = notice
     end
+    respond_with(@view_template)
   end
 
   # DELETE /view_templates/1
