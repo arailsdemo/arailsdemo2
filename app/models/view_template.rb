@@ -1,5 +1,9 @@
 class ViewTemplate
   include Mongoid::Document
+  include Mongoid::Versioning
+  include Mongoid::Timestamps
+
+  max_versions 3
 
   field :name
   field :prefix

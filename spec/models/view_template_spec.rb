@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe ViewTemplate do
-  # FIELDS = [:name, :prefix, :partial, :source, :locale, :formats, :handlers]
+  # FIELDS = [:name, :prefix, :partial, :source, :locale, :formats,
+  #           :handlers, :versions, :created_at, :updated_at]
 
   it { should have_fields(:name, :prefix, :source) }
   it { should have_field(:partial).of_type(Boolean).with_default_value_of(false) }
@@ -14,6 +15,16 @@ describe ViewTemplate do
   end
 
   it { should validate_uniqueness_of(:name).scoped_to(:prefix) }
+
+  [Mongoid::Versioning, Mongoid::Timestamps].each do |mod|
+    it { subject.class.included_modules.should include(mod) }
+  end
+
+  it "only saves up to 3 versions" do
+    template = Factory(:view_template)
+    (1..4).each { |i| template.update_attribute(:source, i.to_s) }
+    template.versions.size.should == 3
+  end
 
   it "clears the MongoidResolver instance cache after saving" do
     MongoidResolver.instance.should_receive(:clear_cache)

@@ -6,7 +6,6 @@ Feature: Versioning View Templates
   Background: Logged in
     Given I am authenticated
 
-  @wip
   Scenario: Viewing previous versions
     Given a view template with three previous edits
     When I submit an edit for that view template

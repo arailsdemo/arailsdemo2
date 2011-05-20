@@ -23,4 +23,11 @@ When /^I submit an edit for that view template$/ do
 end
 
 Then /^I should see the last three edits for that view template$/ do
+  current_path.should == view_template_path(@view_template)
+  @view_template.reload.versions.each do |version|
+    page.should have_content version.source
+  end
 end
+
+
+# save_and_open_page

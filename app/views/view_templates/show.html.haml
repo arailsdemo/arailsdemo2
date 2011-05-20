@@ -22,6 +22,13 @@
   %b= "#{t('view_template.handlers')}:"
   = @view_template.handlers
 
+%h3 Previous Template Source Code Versions:
+%ul
+  - @view_template.versions.reverse.each do |version|
+    %li.view_template_version
+      %b= "#{t('view_template.source')}:"
+      = version.source
+
 = link_to t("view_template.links.edit"), edit_view_template_path(@view_template)
 \|
 = link_to t("view_template.links.index"), view_templates_path
