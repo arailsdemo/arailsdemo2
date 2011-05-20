@@ -60,7 +60,7 @@ class ViewTemplatesController < ApplicationController
 
     respond_to do |format|
       if @view_template.update_attributes(params[:view_template])
-        format.html { redirect_to(@view_template, :notice => 'View template was successfully updated.') }
+        format.html { redirect_to(@view_template, :notice => t("view_template.flash.notice.updated")) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -87,7 +87,7 @@ GEM
     ffi (1.0.7)
       rake (>= 0.8.7)
     fssm (0.2.7)
-    gherkin (2.3.6)
+    gherkin (2.3.8)
       json (>= 1.4.6)
     growl (1.0.3)
     guard-cucumber (0.3.0)

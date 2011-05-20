@@ -28,6 +28,7 @@
     %li.view_template_version
       %b= "#{t('view_template.source')}:"
       = version.source
+      = link_to t("view_template.links.revert"), view_template_path(@view_template, :revert => version.version), :method => :put
 
 = link_to t("view_template.links.edit"), edit_view_template_path(@view_template)
 \|

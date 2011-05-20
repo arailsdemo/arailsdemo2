@@ -28,6 +28,22 @@ Then /^I should see the last three edits for that view template$/ do
     page.should have_content version.source
   end
 end
+######################################################
 
+When /^I revert to the second most recent view template version$/ do
+  visit view_template_path(@view_template)
+  @new_source = @view_template.versions.last.source
+  within :xpath, '//li[@class="view_template_version"][1]' do
+    click_link t.view_template.links.revert
+  end
+  current_path.should == view_template_path(@view_template)
+  page.should have_content t.view_template.flash.notice.updated
+end
+
+Then /^that view template should be the most current$/ do
+end
+
+Then /^I should not see the current view template in the versions list$/ do
+end
 
 # save_and_open_page

@@ -23,3 +23,7 @@ en:
       edit: Edit This Template
       new: Create A New Template
       destroy: Delete
+      revert: Revert to this version
+    flash:
+      notice:
+        updated: The view template was successfully updated.
