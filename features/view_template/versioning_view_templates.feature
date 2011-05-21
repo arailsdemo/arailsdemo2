@@ -10,3 +10,9 @@ Feature: Versioning View Templates
     Given a view template with three previous edits
     When I submit an edit for that view template
     Then I should see the last three edits for that view template
+
+  Scenario: Reverting to a previous version
+    Given a view template with three previous edits
+    When I revert to the second most recent view template version
+    Then that view template should be the most current
+    And I should not see the current view template in the versions list
