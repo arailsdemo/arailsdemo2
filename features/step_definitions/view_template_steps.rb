@@ -1,6 +1,6 @@
 Then /^the new template is used for the home page$/ do
   attributes = Factory.attributes_for(:home_page_view_template)
-  visit root_url
+  visit root_path
 
   page.should have_content attributes[:source]
 end
@@ -47,6 +47,9 @@ Then /^that view template should be the most current$/ do
 end
 
 Then /^I should not see the current view template in the versions list$/ do
+  within "ul.view_template_versions" do
+    page.should_not have_content @new_source
+  end
 end
 
 # save_and_open_page

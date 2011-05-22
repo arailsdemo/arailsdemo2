@@ -24,7 +24,7 @@
     = @view_template.handlers
 
 %h3 Previous Template Source Code Versions:
-%ul
+%ul.view_template_versions
   - @view_template.versions.reverse.each do |version|
     %li.view_template_version
       %b= "#{t('view_template.source')}:"

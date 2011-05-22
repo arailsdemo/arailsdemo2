@@ -10,7 +10,7 @@ FactoryGirl.define do
 
   factory :duplicate_view_template, :parent => :view_template do
     name "  home  \n"
-    prefix "\n  pages\n\r"
+    prefix "  pages\n\r"
   end
 
   factory :invalid_haml_view_template, :parent => :view_template do
