@@ -20,7 +20,7 @@
     = f.text_area :source
   .field
     = f.label :status
-    = f.select :status, options_for_select([['Production', 'production'], ['Development', 'development']])
+    = f.select :status, select_options_from_t('view_template.options.status')
   .field
     = f.label :locale
     = f.text_field :locale
@@ -29,6 +29,6 @@
     = f.text_field :formats
   .field
     = f.label :handlers
-    = f.select :handlers, options_for_select([['Haml', 'haml'],['Erb', 'erb']])
+    = f.select :handlers, select_options_from_t('view_template.options.handlers')
   .actions
     = f.submit t("view_template.form.save")
