@@ -9,6 +9,7 @@ en:
         locale: Locale
         formats: Format
         handlers: Handler
+        status: Status
     errors:
       messages:
         duplicate: is a duplicate
@@ -17,6 +18,13 @@ en:
     <<: *view_template
     form:
       save: Save Template
+    options:
+      status:
+        development: Development
+        production: Production
+      handlers:
+        haml: Haml
+        erb: Erb
     links:
       index: Show All Templates
       show: View This Template

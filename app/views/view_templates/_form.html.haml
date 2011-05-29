@@ -19,6 +19,9 @@
     = f.label :source
     = f.text_area :source
   .field
+    = f.label :status
+    = f.select :status, options_for_select([['Production', 'production'], ['Development', 'development']])
+  .field
     = f.label :locale
     = f.text_field :locale
   .field

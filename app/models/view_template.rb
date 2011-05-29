@@ -12,6 +12,7 @@ class ViewTemplate
   field :formats,  :default => "html"
   field :locale,   :default => "en"
   field :handlers, :default => "haml"
+  field :status,   :default => "production"
 
   validates :name, :prefix, :source, :presence => true
   validates_uniqueness_of :name, :scope => :prefix, :message => :duplicate

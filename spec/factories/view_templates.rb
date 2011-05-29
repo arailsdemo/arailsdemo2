@@ -16,4 +16,10 @@ FactoryGirl.define do
   factory :invalid_haml_view_template, :parent => :view_template do
     source "= this_method_no_exist"
   end
+
+  factory :pages_layout, :parent => :view_template do
+    name "pages"
+    prefix "layouts"
+    source "%h1 Production Pages Layout\n=yield"
+  end
 end
