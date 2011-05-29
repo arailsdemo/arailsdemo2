@@ -24,6 +24,25 @@ class ViewTemplate
     MongoidResolver.instance.clear_cache
   end
 
+  class << self
+    def preview(template_id)
+      template = find(template_id)
+      view = ActionView::Base.new(PreviewResolver.for_document(template), {})
+      view.render(render_options(template))
+    end
+
+    def render_options(template)
+      opts = { :template => "#{template.prefix}/#{template.name}" }
+      layout = associated_layout_for(template)
+      opts.merge!({:layout => "#{layout.prefix}/#{layout.name}"}) if layout
+      opts
+    end
+
+    def associated_layout_for(template)
+      where(:prefix => 'layouts', :name => template.prefix).first
+    end
+  end
+
   def revert(_version)
     return nil unless _version
     selected = versions.where(:version => _version.to_i).first
