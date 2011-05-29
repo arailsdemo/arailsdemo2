@@ -15,8 +15,6 @@ describe ViewTemplate do
     it { should validate_presence_of(field) }
   end
 
-  it { should validate_uniqueness_of(:name).scoped_to(:prefix) }
-
   [Mongoid::Versioning, Mongoid::Timestamps].each do |mod|
     it { subject.class.included_modules.should include(mod) }
   end
@@ -34,18 +32,19 @@ describe ViewTemplate do
 
   context "duplicate validation" do
     before do
-      @existing = Factory(:view_template)
-      @template = Factory.build(:duplicate_view_template)
+      @existing = Factory(:view_template, :status => "production")
+      @template = Factory.build(:duplicate_view_template, :status => "production")
+    end
+
+    it "adds error message to :name if name/prefix is a duplicate production" do
       @template.valid?
-    end
-
-    it "removes whitespace from the name and prefix" do
-      @template.name.should == @existing.name
-      @template.prefix.should == @existing.prefix
-    end
-
-    it "adds error message to :name if name/prefix is a duplicate" do
       @template.errors[:name].should == [I18n.t('mongoid.errors.messages.duplicate')]
+    end
+
+    it "allows duplicate templates if they are in development " do
+      @template.status = "development"
+      @template.valid?
+      @template.errors[:name].should == []
     end
   end
 

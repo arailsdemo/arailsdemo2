@@ -15,8 +15,8 @@ class ViewTemplate
   field :status,   :default => "production"
 
   validates :name, :prefix, :source, :presence => true
-  validates_uniqueness_of :name, :scope => :prefix, :message => :duplicate
   validate :haml_syntax_is_valid
+  validate :uniqueness_of_template
 
   before_validation :strip_whitespace
 
@@ -59,5 +59,15 @@ class ViewTemplate
         errors.add(:source, :haml, :exception => e)
       end
     end if handlers == "haml"
+  end
+
+   def uniqueness_of_template
+    return if status == "development"
+    absent = self.class.where(
+      :name => name, :prefix => prefix,
+      :status => "production", :_id.nin => [self._id]
+    ).empty?
+
+    errors.add(:name, :duplicate) unless absent
   end
 end
