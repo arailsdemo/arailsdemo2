@@ -105,4 +105,33 @@ describe ViewTemplate do
                                    :view_template => '123').should be_true
     end
   end
+
+  describe ".preview" do
+    before do
+      @mock_view = double(ActionView::Base)
+      @template = Factory(:home_page_view_template)
+      PreviewResolver.stub(:for_document).with(@template) { 'resolver' }
+      ActionView::Base.stub(:new).with('resolver', {}) { @mock_view }
+    end
+
+    context "when a layout isn't present" do
+      it "calls render on the view with the the specified template" do
+        @mock_view.should_receive(:render).with(
+          { :template => "#{@template.prefix}/#{@template.name}" }
+        )
+        ViewTemplate.preview(@template.id)
+      end
+    end
+
+    context "when a layout is present" do
+      it "calls render on the view with the specified layout and template" do
+        layout = Factory(:pages_layout)
+        @mock_view.should_receive(:render).with(
+          { :template => "#{@template.prefix}/#{@template.name}",
+            :layout => "#{layout.prefix}/#{layout.name}" }
+        )
+        ViewTemplate.preview(@template.id)
+      end
+    end
+  end
 end
