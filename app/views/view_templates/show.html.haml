@@ -1,5 +1,7 @@
 %p#notice= notice
 
+.preview_link= link_to t("view_template.links.preview"), preview_view_template_path(@view_template)
+
 .view_template_current
   %p
     %b= "#{t('view_template.name')}:"

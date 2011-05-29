@@ -32,6 +32,7 @@ en:
       new: Create A New Template
       destroy: Delete
       revert: Revert to this version
+      preview: Preview this template
     flash:
       notice:
         updated: The view template was successfully updated.

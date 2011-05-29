@@ -75,4 +75,8 @@ class ViewTemplatesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def preview
+    render :text => ViewTemplate.preview(params[:id])
+  end
 end

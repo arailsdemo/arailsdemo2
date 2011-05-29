@@ -78,7 +78,13 @@ When /^I create a home page template for development$/ do
 end
 
 Then /^I should see the development template within the production layout on the preview page$/ do
-  pending
+  click_link t.view_template.links.preview
+  within "h1" do
+    page.should have_content "Production Pages Layout"
+  end
+  within "h2" do
+    page.should have_content "Development Home Page"
+  end
 end
 
 Then /^I should not see the development template on the home page$/ do

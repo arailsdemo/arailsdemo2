@@ -125,4 +125,10 @@ describe ViewTemplatesController do
     end
   end
 
+  describe "GET preview" do
+    it "calls ViewTemplate.preview" do
+      ViewTemplate.should_receive(:preview).with("1")
+      get :preview, :id => "1"
+    end
+  end
 end

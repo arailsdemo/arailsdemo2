@@ -1,7 +1,9 @@
 Arailsdemo2::Application.routes.draw do
   get "pages/home"
 
-  resources :view_templates
+  resources :view_templates do
+    member { get 'preview' }
+  end
 
   root :to =>"pages#home"
 
