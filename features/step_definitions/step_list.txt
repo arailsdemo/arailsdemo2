@@ -1,10 +1,25 @@
-File generated on Sun May 15 16:58:05 -0700 2011
-____________________________________________________________________________
-1) I am authenticated                             # common_steps.rb:1
-2) I attempt to create a duplicate template       # view_template_steps.rb:8
-3) I create an? (.+) (?:for|with(?: the)?) (.+)   # common_steps.rb:6
-4) I should get an? (.*) error                    # common_steps.rb:20
-5) I submit a (.+) form with (.+)                 # common_steps.rb:14
-____________________________________________________________________________
-6) an? (.+) exists with an? (.+) of "([^"]*)"     # mongoid_steps.rb:1
-7) the new template is used for the home page     # view_template_steps.rb:1
+File generated on Mon May 30 07:23:16 -0700 2011
+________________________________________________________________________________________________________________________
+1) I am authenticated                                                                       # common_steps.rb:1
+2) I attempt to create a duplicate template                                                 # view_template_steps.rb:13
+3) I create a home page template for development                                            # view_template_steps.rb:71
+4) I create a view template for the home page                                               # view_template_steps.rb:2
+5) I revert to the second most recent view template version                                 # view_template_steps.rb:42
+________________________________________________________________________________________________________________________
+6) I should get an? (.*) error                                                              # common_steps.rb:18
+7) I should not see the current view template in the versions list                          # view_template_steps.rb:58
+8) I should not see the development template on the home page                               # view_template_steps.rb:90
+9) I should see the development template within the production layout on the preview page   # view_template_steps.rb:80
+10) I should see the last three edits for that view template                                 # view_template_steps.rb:33
+________________________________________________________________________________________________________________________
+11) I should see the production template within the development layout                       # view_template_steps.rb:111
+12) I submit a (.+) form with (.+)                                                           # common_steps.rb:12
+13) I submit an edit for that view template                                                  # view_template_steps.rb:29
+14) I visit the preview page for the layout                                                  # view_template_steps.rb:107
+15) a development layout and a production template are present for the home page             # view_template_steps.rb:100
+________________________________________________________________________________________________________________________
+16) a production layout and template are present for the home page                           # view_template_steps.rb:66
+17) a view template with three previous edits                                                # view_template_steps.rb:24
+18) an? (.+) exists                                                                          # common_steps.rb:6
+19) that view template should be the most current                                            # view_template_steps.rb:52
+20) the new template is used for the home page                                               # view_template_steps.rb:6

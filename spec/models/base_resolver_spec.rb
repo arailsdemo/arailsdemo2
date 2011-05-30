@@ -30,13 +30,24 @@ describe BaseResolver do
       found_view_templates.should == []
     end
 
-    it "returns an empty array if the document is in development" do
-      document = ViewTemplate.create(
-        :name => "posts", :prefix => 'layouts', :source => 'source',
-        :status => "development"
-      )
+    context "given a development view template" do
+      before do
+        @document = ViewTemplate.create(
+          :name => "posts", :prefix => 'layouts', :source => 'source',
+          :status => "development"
+        )
+      end
 
-      found_view_templates.should == []
+      it "returns an empty array by default" do
+        found_view_templates.should == []
+      end
+
+      it "returns the template in an array if the production flag is false" do
+        subject.find_templates(
+          'posts', 'layouts', false, { :handlers => [:erb, :haml],
+          :formats => [:html, :json], :locale => [:en, :en] }, false
+        ).first.identifier.should == "view_template-#{@document.id}-layouts-posts"
+      end
     end
   end
 end

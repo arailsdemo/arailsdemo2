@@ -31,15 +31,39 @@ class ViewTemplate
       view.render(render_options(template))
     end
 
-    def render_options(template)
-      opts = { :template => "#{template.prefix}/#{template.name}" }
-      layout = associated_layout_for(template)
-      opts.merge!({:layout => "#{layout.prefix}/#{layout.name}"}) if layout
-      opts
+    def render_options(template_or_layout)
+      if template_or_layout.prefix == 'layouts'
+        template = associated_template_for(template_or_layout)
+        if template
+          layout_path = path_for(template_or_layout)
+          template_path = path_for(template)
+        else
+          template_path = path_for(template_or_layout)
+        end
+      else
+        template_path = path_for(template_or_layout)
+        layout = associated_layout_for(template_or_layout)
+        layout_path = path_for(layout) if layout
+      end
+
+      opts = layout_path ? { :layout => layout_path } : {}
+      opts.merge!({:template => template_path})
     end
 
+    private
+
     def associated_layout_for(template)
-      where(:prefix => 'layouts', :name => template.prefix).first
+      where(:prefix => 'layouts', :name => template.prefix).first ||
+      where(:prefix => 'layouts', :name => 'application').first
+    end
+
+    def associated_template_for(layout)
+      return where(:prefix.nin => ["layouts"]).first if layout.name == 'application'
+      where(:prefix => layout.name).first
+    end
+
+    def path_for(template)
+      "#{template.prefix}/#{template.name}"
     end
   end
 

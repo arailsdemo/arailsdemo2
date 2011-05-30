@@ -1,9 +1,9 @@
 class BaseResolver < ActionView::Resolver
   attr_accessor :document
 
-  def find_templates(name, prefix, partial, details)
-    search_args = { :name => name, :prefix => prefix,
-                    :partial => partial, :status => "production" }
+  def find_templates(name, prefix, partial, details, production=true)
+    search_args = { :name => name, :prefix => prefix, :partial => partial }
+    search_args.merge!({ :status => "production" }) if production
     self.document = ViewTemplate.where(search_args).any_in(details).first
 
     return [] unless self.document

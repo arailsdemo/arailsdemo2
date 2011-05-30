@@ -107,31 +107,87 @@ describe ViewTemplate do
   end
 
   describe ".preview" do
+    def path_for(template)
+      "#{template.prefix}/#{template.name}"
+    end
+
+    shared_examples_for "a full preview" do
+      it "calls render on the view with the specified layout and template" do
+        @mock_view.should_receive(:render).with(
+          { :template => path_for(@template), :layout => path_for(@layout) }
+        )
+        ViewTemplate.preview(@target.id)
+      end
+    end
+
+    shared_examples_for "a layout preview" do
+      context "and a template is present" do
+        before { @template = Factory(:home_page_view_template) }
+        it_behaves_like "a full preview"
+      end
+
+      context "and a template isn't present" do
+        it "calls render on the view with just the layout" do
+          @mock_view.should_receive(:render).with(
+            { :template => path_for(@layout) }
+          )
+          ViewTemplate.preview(@layout.id)
+        end
+      end
+    end
+
     before do
       @mock_view = double(ActionView::Base)
-      @template = Factory(:home_page_view_template)
-      PreviewResolver.stub(:for_document).with(@template) { 'resolver' }
       ActionView::Base.stub(:new).with('resolver', {}) { @mock_view }
     end
 
-    context "when a layout isn't present" do
-      it "calls render on the view with the the specified template" do
-        @mock_view.should_receive(:render).with(
-          { :template => "#{@template.prefix}/#{@template.name}" }
-        )
-        ViewTemplate.preview(@template.id)
+    context "when previewing a template" do
+      before do
+        @template = Factory(:home_page_view_template)
+        PreviewResolver.stub(:for_document).with(@template) { 'resolver' }
+        @target = @template
+      end
+
+      context "and a layout is present" do
+        before { @layout = Factory(:pages_layout) }
+
+        it_behaves_like "a full preview"
+      end
+
+      context "and an application layout is present" do
+        before { @layout = Factory(:pages_layout, :name => 'application') }
+
+        it_behaves_like "a full preview"
+      end
+
+      context "and a layout isn't present" do
+        it "calls render on the view with just the template" do
+          @mock_view.should_receive(:render).with(
+            { :template => path_for(@template) }
+          )
+          ViewTemplate.preview(@template.id)
+        end
       end
     end
 
-    context "when a layout is present" do
-      it "calls render on the view with the specified layout and template" do
-        layout = Factory(:pages_layout)
-        @mock_view.should_receive(:render).with(
-          { :template => "#{@template.prefix}/#{@template.name}",
-            :layout => "#{layout.prefix}/#{layout.name}" }
-        )
-        ViewTemplate.preview(@template.id)
+    context "when previewing a layout" do
+      before do
+        @layout = Factory(:pages_layout)
+        PreviewResolver.stub(:for_document).with(@layout) { 'resolver' }
+        @target = @layout
       end
+
+      it_behaves_like "a layout preview"
+    end
+
+    context "when previewing an application layout" do
+      before do
+        @layout = Factory(:pages_layout, :name => 'application')
+        PreviewResolver.stub(:for_document).with(@layout) { 'resolver' }
+        @target = @layout
+      end
+
+      it_behaves_like "a layout preview"
     end
   end
 end

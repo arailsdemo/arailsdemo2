@@ -12,7 +12,9 @@ class PreviewResolver < BaseResolver
       self.document = target
       [ActionView::Template.new(*template_args)]
     else
-      super
+      templates = super
+      return templates unless templates.empty?
+      super(name, prefix, partial, details, false)
     end
   end
 end

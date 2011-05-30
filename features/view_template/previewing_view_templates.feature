@@ -11,3 +11,8 @@ Feature: Previewing View Templates
     When I create a home page template for development
     Then I should see the development template within the production layout on the preview page
     And I should not see the development template on the home page
+
+  Scenario: Viewing a layout in development
+    Given a development layout and a production template are present for the home page
+    When I visit the preview page for the layout
+    Then I should see the production template within the development layout

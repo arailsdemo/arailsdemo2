@@ -97,4 +97,24 @@ Then /^I should not see the development template on the home page$/ do
   end
 end
 
+Given /^a development layout and a production template are present for the home page$/ do
+  @layout = Factory(:pages_layout, :status => 'development',
+                    :source => "%h1 Dev Layout\n=yield")
+  @template = Factory(:home_page_view_template, :status => 'production',
+                      :source => '%h2 Prod Home Page')
+end
+
+When /^I visit the preview page for the layout$/ do
+  visit preview_view_template_path(@layout)
+end
+
+Then /^I should see the production template within the development layout$/ do
+  within "h1" do
+    page.should have_content "Dev Layout"
+  end
+  within "h2" do
+    page.should have_content "Prod Home Page"
+  end
+end
+
 # save_and_open_page
