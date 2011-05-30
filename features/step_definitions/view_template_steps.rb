@@ -88,7 +88,13 @@ Then /^I should see the development template within the production layout on the
 end
 
 Then /^I should not see the development template on the home page$/ do
-  pending
+  visit root_path
+  within "h2" do
+    page.should_not have_content "Development Home Page"
+  end
+  within "h2" do
+    page.should have_content "Production Home Page"
+  end
 end
 
 # save_and_open_page

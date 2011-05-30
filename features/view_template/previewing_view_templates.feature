@@ -6,7 +6,6 @@ Feature: Previewing View Templates
   Background: Logged in
     Given I am authenticated
 
-  @wip
   Scenario: Viewing a template in development
     Given a production layout and template are present for the home page
     When I create a home page template for development
